@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk" version="4.0"/>
+    <requires lib="libadwaita" version="1.0"/>
+
+    <object class="AdwWindow" id="manager_window">
+        <property name="title">Kote</property>
+        <property name="default-width">1100</property>
+        <property name="default-height">550</property>
+
+        <child>
+            <object class="AdwLeaflet" id="subpage_leaflet">
+                <property name="can-navigate-back">True</property>
+                <property name="width-request">360</property>
+                <property name="can-unfold">False</property>
+                <property name="transition-type" bind-source="content_box" bind-property="transition-type" bind-flags="sync-create"/>
+
+                <child>
+                    <object class="AdwLeaflet" id="content_box">
+                        <property name="can-navigate-back">True</property>
+
+                        <child>
+                            <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">5</property>
+
+                                <child>
+                                    <object class="AdwHeaderBar">
+                                        <property name="show-end-title-buttons" bind-source="content_box" bind-property="folded" bind-flags="sync-create"/>
+
+                                        <child type="start">
+                                            <object class="GtkButton" id="color_scheme_button">
+                                            </object>
+                                        </child>
+
+                                        <child type="start">
+                                            <object class="GtkButton" id="about_dev_button">
+                                                <property name="icon-name">dialog-information-symbolic</property>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkStackSidebar" id="sidebar">
+                                        <property name="width_request">270</property>
+                                        <property name="vexpand">True</property>
+                                        <property name="stack">stack</property>
+                                    </object>
+                                </child>
+                                
+                            </object>
+                        </child>
+                        <child>
+                            <object class="AdwLeafletPage">
+                                <property name="navigatable">False</property>
+                                <property name="child">
+                                    <object class="GtkSeparator"/>
+                                </property>
+                            </object>
+                        </child>
+                        <child>
+                            <object class="GtkBox" id="right_box">
+                                <property name="orientation">vertical</property>
+                                <property name="hexpand">True</property>
+
+                                <child>
+                                    <object class="AdwHeaderBar">
+                                        <property name="show-start-title-buttons" bind-source="content_box" bind-property="folded" bind-flags="sync-create"/>
+                                        <property name="title-widget">
+                                            <object class="GtkBox"/>
+                                        </property>
+
+                                        <child type="start">
+                                            <object class="GtkButton" id="back">
+                                                <property name="valign">center</property>
+                                                <property name="tooltip-text" translatable="yes">Back</property>
+                                                <property name="icon-name">go-previous-symbolic</property>
+                                                <property name="visible" bind-source="content_box" bind-property="folded" bind-flags="sync-create"/>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="GtkStack" id="stack">
+                                        <property name="vexpand">True</property>
+                                        <property name="vhomogeneous">False</property>
+                                        <property name="width_request">400</property>
+                                        <property name="transition-type">GTK_STACK_TRANSITION_TYPE_CROSSFADE</property>
+
+                                        <child>
+                                            <object class="GtkStackPage">
+                                                <property name="name">start_page</property>
+                                                <property name="title" translatable="yes">Стартовая страница</property>
+                                                <property name="child">
+                                                    <object class="AdwStatusPage">
+                                                        <property name="icon-name">document-page-setup-symbolic</property>
+                                                        <property name="title">Добро пожаловать!</property>
+                                                        <property name="description" translatable="yes">Это приложения было разработано для финала НТО</property>
+                                                    </object>
+                                                </property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkStackPage">
+                                                <property name="name">stations_page</property>
+                                                <property name="title" translatable="yes">Управление станциями</property>
+                                                <property name="child">
+                                                    <object class="GtkNotebook">
+                                                        <property name="tab-pos">GTK_POS_BOTTOM</property>
+                                                        <child>
+                                                            <object class="GtkBox" id="stations_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="stations_tab">
+                                                              <property name="label">Станции</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="station_pauses_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="station_pauses_tab">
+                                                              <property name="label">Приостановка работы</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="station_stopes_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="station_stopes_tab">
+                                                              <property name="label">Закрытие станции</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkStackPage">
+                                                <property name="name">articles_page</property>
+                                                <property name="title" translatable="yes">Управление номенклатурой</property>
+                                                <property name="child">
+                                                    <object class="GtkNotebook">
+                                                        <property name="tab-pos">GTK_POS_BOTTOM</property>
+                                                        <child>
+                                                            <object class="GtkBox" id="articles_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="articles_tab">
+                                                              <property name="label">Номенклатура</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="article_start_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="article_start_tab">
+                                                              <property name="label">Ввод в эксплуатацию</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="article_finish_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="article_finish_tab">
+                                                              <property name="label">Вывод из эксплуатации</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="article_moves_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="article_moves_tab">
+                                                              <property name="label">Перемещения</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="article_changes_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="article_changes_tab">
+                                                              <property name="label">Прайс</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="article_types_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="article_types_tab">
+                                                              <property name="label">Типы номенклатуры</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkStackPage">
+                                                <property name="name">rent_page</property>
+                                                <property name="title" translatable="yes">Контроль клиентских действий</property>
+                                                <property name="child">
+                                                    <object class="GtkNotebook">
+                                                        <property name="tab-pos">GTK_POS_BOTTOM</property>
+                                                        <child>
+                                                            <object class="GtkBox" id="start_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="start_tab">
+                                                              <property name="label">Начало аренды</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="finish_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="finish_tab">
+                                                              <property name="label">Окончание аренды</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="payment_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="payment_tab">
+                                                              <property name="label">Оплата</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="bonus_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="bonus_tab">
+                                                              <property name="label">Начисление бонусов</property>
+                                                            </object>
+                                                        </child>
+                                                    </object>
+                                                </property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkStackPage">
+                                                <property name="name">users_page</property>
+                                                <property name="title" translatable="yes">Учетные записи и события</property>
+                                                <property name="child">
+                                                    <object class="GtkNotebook">
+                                                        <property name="tab-pos">GTK_POS_BOTTOM</property>
+                                                        <child>
+                                                            <object class="GtkBox" id="users_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="users_tab">
+                                                              <property name="label">Пользователи</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="empl_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="empl_tab">
+                                                              <property name="label">Сотрудники</property>
+                                                            </object>
+                                                        </child>
+
+                                                        <child>
+                                                            <object class="GtkBox" id="ev_content">
+                                                                <property name="orientation">vertical</property>
+                                                                <property name="spacing">5</property>
+                                                            </object>
+                                                        </child>
+                                                        <child type="tab">
+                                                            <object class="GtkLabel" id="ev_tab">
+                                                              <property name="label">События</property>
+                                                            </object>
+                                                        </child>
+
+                                                    </object>
+                                                </property>
+                                            </object>
+                                        </child>
+                                        <child>
+                                            <object class="GtkStackPage">
+                                                <property name="name">lk_page</property>
+                                                <property name="title" translatable="yes">Личный кабинет</property>
+                                                <property name="child">
+                                                    <object class="AdwStatusPage">
+                                                        <property name="icon-name">document-page-setup-symbolic</property>
+                                                        <property name="title">Добро пожаловать!</property>
+                                                        <property name="description" translatable="yes">Это приложения было разработано для финала НТО</property>
+                                                    </object>
+                                                </property>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </object>
+</interface>

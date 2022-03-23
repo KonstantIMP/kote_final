@@ -1,0 +1,15 @@
+{
+	"authors": [
+		"KonstantIMP",
+		"loveseo8"
+	],
+	"copyright": "Copyright © 2021, KonstantIMP",
+	"dependencies": {
+		"gtk_d:adw": "~>1.0.1",
+		"gtk_d:gtk": "~>1.0.1",
+		"d2sqlite3" : "~>1.0.0"
+	},
+	"description": "A database manager for the \"КОТЭ\" group",
+	"license": "proprietary",
+	"name": "cat-db"
+}
